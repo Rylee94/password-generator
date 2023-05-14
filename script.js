@@ -146,5 +146,21 @@ function writePassword() {
   passwordText.value = password;
 }
 
+//this function will generate the random password using passwordLength
+function generatePassword(allChar) {
+  //local variable to hold the password result
+  var passwordResult = "";
+  for (var i = 0; i < passwordLength; i++) {
+    //find a random index of allChar
+    var randomCharIndex = Math.floor(Math.random() * allChar.length);
+    //use the random index to select THE character from allChar to add to the password
+    var randomChar = allChar[randomCharIndex];
+    //add the random character to the password
+    passwordResult += randomChar;
+  }
+  // return the password
+  return passwordResult;
+}
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
