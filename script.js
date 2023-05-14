@@ -146,10 +146,17 @@ function writePassword() {
   passwordText.value = password;
 }
 
+//1. password result is going to store the random result that we create and it will be passwordLength long
+//2. next we use a for loop to generate passwordLength(is a number#) Characters
+//3. inside the for loop we are using math.floor and math.random to pick a random character from allChar
+
 //this function will generate the random password using passwordLength
 function generatePassword(allChar) {
   //local variable to hold the password result
   var passwordResult = "";
+  //1. define variable i as 0
+  //2. for loop will repeat until i >= passwordLength
+  //3. i will increase by 1 each iteration
   for (var i = 0; i < passwordLength; i++) {
     //find a random index of allChar
     var randomCharIndex = Math.floor(Math.random() * allChar.length);
