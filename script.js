@@ -150,7 +150,7 @@ function promptPasswordLength() {
     var passwordLength = window.prompt(
       "Enter desired length of password between 8-128"
     );
-    if (isNumeric(passwordLength) && isValidPasswordLength(passwordLength)) {
+    if (isValidPasswordLength(passwordLength)) {
       length = parseInt(passwordLength);
       validInput = true;
     }
@@ -159,7 +159,7 @@ function promptPasswordLength() {
   return length;
 }
 
-function isNumeric(value) {
+function includeNumeric(value) {
   return /^-?\d+$/.test(value);
 }
 
