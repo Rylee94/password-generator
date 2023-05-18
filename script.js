@@ -107,43 +107,65 @@ var upperCase = [
 ];
 // Write password to the #password input
 
-//this function will ask the user for password criteria.
 function writePassword() {
-  //this will hold all of the possible characters that could be included in the password
   var allChar = [];
-  passwordLength = window.prompt(
-    "Enter desired length of password between 8-128"
+
+  // Prompt for password length with input validation
+  passwordLength = promptPasswordLength();
+
+  includeUpperCase = window.confirm(
+    "Do you want to include uppercase letters?"
   );
-  includeUpperCase = window.confirm("Do you want to include upercase letters?");
   includeLowerCase = window.confirm(
     "Do you want to include lowercase letters?"
-  ); //window.prompt("Do you want to include lowercase letters?");
+  );
   includeNumeric = window.confirm("Do you want to include numbers?");
   includeSpecialChar = window.confirm(
     "Do you want to include special characters?"
   );
 
-  //If include lower case is true, allChar now = lowercase.
-  if (includeLowerCase === true) {
+  if (includeLowerCase) {
     allChar = allChar.concat(lowerCase);
   }
-  //If include upper case is true (the user hit okay), we add uppercase to allChar.
-  if (includeUpperCase === true) {
+  if (includeUpperCase) {
     allChar = allChar.concat(upperCase);
   }
-  //If include numeric is true, we add numeric to allChar
-  if (includeNumeric === true) {
+  if (includeNumeric) {
     allChar = allChar.concat(numeric);
   }
-  //If include specialChar is true, we add special characters to allChar
-  if (includeSpecialChar === true) {
+  if (includeSpecialChar) {
     allChar = allChar.concat(specialChar);
   }
 
-  //use generatePassword to create a password
   var password = generatePassword(allChar);
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
+}
+
+function promptPasswordLength() {
+  var length;
+  var validInput = false;
+
+  while (!validInput) {
+    var passwordLength = window.prompt(
+      "Enter desired length of password between 8-128"
+    );
+    if (isNumeric(passwordLength) && isValidPasswordLength(passwordLength)) {
+      length = parseInt(passwordLength);
+      validInput = true;
+    }
+  }
+
+  return length;
+}
+
+function isNumeric(value) {
+  return /^-?\d+$/.test(value);
+}
+
+function isValidPasswordLength(passwordLength) {
+  var length = parseInt(passwordLength);
+  return length >= 8 && length <= 128;
 }
 
 //1. password result is going to store the random result that we create and it will be passwordLength long
